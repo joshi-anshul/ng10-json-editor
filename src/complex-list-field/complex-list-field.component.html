@@ -1,0 +1,80 @@
+<div [id]="pathString">
+  <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. -->
+  <div *ngIf="navigator || shouldDisplayViewTemplate" class="top-bar-container">
+    <div *ngIf="navigator">
+      <div class="input-group input-group-sm">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </span>
+        <input type="search" class="form-control" [(ngModel)]="findExpression" (keypress)="onFindInputKeypress($event.key)" placeholder="Find"
+        />
+        <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
+          <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
+        </span>
+        <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
+          <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
+        </span>
+        <span *ngIf="foundIndices" [ngSwitch]="foundIndices.length" class="input-group-addon transparent borderless">
+          <span *ngSwitchCase="0">
+            Nothing found
+          </span>
+          <span *ngSwitchDefault>
+            {{currentFound + 1}} of {{foundIndices.length}}
+          </span>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="shouldDisplayViewTemplate" class="btn-group">
+      <label class="btn btn-switch" [class.active]="!shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = false">All</label>
+      <label class="btn btn-switch" [class.active]="shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = true">To Edit</label>
+    </div>
+    <div *ngIf="headerItemTemplate">
+      <ng-template [ngTemplateOutlet]="headerItemTemplate"></ng-template>
+    </div>
+    <div *ngIf="navigator">
+      <label class="item-count-label">
+        {{paginatableItems.size}} {{path[path.length - 1]}}
+      </label>
+      <br>
+      <pagination [totalItems]="paginatableItems.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
+        class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'"
+        [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
+    </div>
+  </div>
+  <div [ngClass]="redLeftBorderClass">
+    <!-- Elements -->
+    <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
+      <div class="complex-list-field-wrapper">
+        <span *ngIf="shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0">
+          <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
+          <a href="javascript:void(0)" (click)="item.editFormDisplayedByUser = !shouldDisplayEditableFieldsForItem(item)">
+            {{shouldDisplayEditableFieldsForItem(item) ? 'Hide Fields' : 'Show Fields'}}
+          </a>
+        </span>
+        <span *ngIf="shouldDisplayEditableFieldsForItem(item)">
+          <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)" [isComplexListFieldItem]="true">
+          </object-field>
+          <div class="row element-button-container">
+            <div class="col-md-12 text-right">
+              <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
+                [isDisabled]="disabled || hasPatchOrChildrenHavePatch()">
+              </list-action-group>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="text-right" *ngIf="removeJsonPatch">
+      <patch-actions [patch]="removeJsonPatch"></patch-actions>
+    </div>
+  </div>
+
+  <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
+    <add-or-replace-patch [patch]="patch"></add-or-replace-patch>
+  </div>
+  <div *ngIf="replaceJsonPatches && replaceJsonPatches[0]">
+    <add-or-replace-patch [patch]="replaceJsonPatches[0]"></add-or-replace-patch>
+  </div>
+</div>

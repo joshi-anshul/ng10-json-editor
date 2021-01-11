@@ -1,0 +1,65 @@
+td.value-container span[contenteditable=true],
+td.value-container input {
+  vertical-align: middle;
+  transition: all 0.5s ease;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  width:100%;
+}
+
+table.primitive-field-container {
+  width: 100%;
+}
+
+td.link-button-container {
+  width: 22px;
+}
+
+td.value-container {
+  width: 100%;
+  padding: 3px 3px 3px 6px !important;
+  
+  &:hover {
+    background-color: #ffa !important;
+  }
+}
+
+a.no-decoration {
+  text-decoration: none;
+}
+
+[contenteditable=true] {
+  min-height: 18px;
+  word-break: break-word;
+  
+  &:empty:before {
+    content: attr(placeholder);
+    color: darkgray;
+    display: block; /* For Firefox */
+  }
+}
+
+.tooltip-left-align {
+  margin-left:12px;
+  padding:0px;
+}
+
+.btn-merge {
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+}
+
+$patch-color: #e67e22;
+.orange-left-border {
+  border-left: 9px solid $patch-color;
+  border-radius: 0;
+}
+
+.fa-bolt {
+  color: $patch-color;
+}
+

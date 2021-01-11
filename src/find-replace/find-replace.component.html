@@ -1,0 +1,15 @@
+<div class="find-replace-container">
+  <div class="top-container-item">
+    <input placeholder="Find" [(ngModel)]="find" (keypress)="onKeypress($event.key)" />
+  </div>
+  <div>
+    <input placeholder="Replace" [(ngModel)]="replace" (keypress)="onKeypress($event.key)" />
+  </div>
+  <div class="bottom-container-item">
+    <label>
+      Exact phrase
+      <input type="checkbox" [(ngModel)]="exactPhrase" (keypress)="onKeypress($event.key)"/>
+    </label>
+    <i class="fa fa-arrow-circle-right" (click)="findAndReplace()"></i>
+  </div>
+</div>

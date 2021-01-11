@@ -1,0 +1,579 @@
+// Material UI colors
+// from https://flatuicolors.com/
+$turquoise: #1abc9c;
+$green-sea: #16a085;
+$pete-river: #3498db;
+$belize-hole: #2980b9;
+$amethyst: #9b59b6;
+$wisteria: #8e44ad;
+$blue-haze: #8aa2ba;
+$wet-asphalt: #34495e;
+$midnight-blue: #2c3e50;
+$dark-blue:#1D2D3D;
+$sun-flower: #f1c40f;
+$orange: #f39c12;
+$carrot: #e67e22;
+$pumpkin: #d35400;
+$alizarin: #e74c3c;
+$pomegranate: #c0392b;
+$clouds: #ecf0f1;
+$silver: #bdc3c7;
+$concrete: #95a5a6;
+$asbestos: #7f8c8d;
+
+$text-button-font-size: 13px;
+
+// Extra colors
+$table-editable-rows-background: #edf6fd;
+$label-color: #c1c1c1;
+$error-color: $alizarin;
+$label-holder-background-color: #dae8ef;
+$label-holder-button-color: #595959;
+
+//widths for different panels
+$default-sidebar-width: 50px;
+$expanded-sidebar-width: 280px;
+
+@mixin top-level-add-field-dropdown-container {
+  div.dropdown {
+    width: 100vh;
+  }
+
+  ul.dropdown-menu {
+    right: 0px;
+    padding-bottom: 15px;
+  }
+
+  button.btn-add-field-dropdown {
+    background: white;
+    padding: 5px;
+    opacity: 0.9;
+    line-height: normal;
+    font-size: 16px;
+    width: 100%;
+
+    &:hover {
+      opacity: 1;
+      color: black;
+    }
+  }
+}
+
+@mixin opac-btn($hover-color) {
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
+  background: transparent;
+  border: 0;
+  padding: 0 0 3px 3px;
+
+  &:hover {
+    color: $hover-color;
+    opacity: 0.6;
+  }
+}
+
+@mixin opac-text-btn {
+  font-size: $text-button-font-size;
+  opacity: 0.5;
+  padding: 0px;
+}
+
+html, body {
+  height:100%;
+  background-color: #ecf0f1;
+  overflow-x: hidden;
+}
+
+.editor-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  margin-right: 0px;
+  margin-left: 0px;
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+.bs-tooltip-right {
+  width: 120px !important;
+}    
+
+.shorter-editor-container {
+  height: 75%;
+}
+
+#ng2-json-editor {
+  
+  .dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  th {
+    font-weight: 400;
+    padding: 1px 0px 1px 6px;
+    background-color: #ecf0f1;
+    color: #8e8e8e;
+    font-weight: bold;
+
+    .dropdown-filter-container {
+      font-weight: initial;
+    }
+  }
+
+  td {
+    background-color: #f9f9f9;
+    border: none;
+    padding: 0;
+  }
+
+  td > * {
+    vertical-align : middle;
+  }
+  
+  td.label-holder {
+    width: 1%;
+    white-space: nowrap;
+    padding: 3px;
+    background-color: $label-holder-background-color;
+    border-top: 1px solid $silver;
+
+    button {
+      color: $label-holder-button-color;
+    }
+
+  }
+
+  tr.error td, td.error {
+    color: white;
+    background-color: $error-color !important;
+    transition: all .4s;
+  }
+
+  tbody {
+    border: none;
+  }
+
+  table {
+    margin-bottom: 0px !important;
+  }
+
+  .main-container.compact {
+    border-left: none;
+  }
+
+  .main-container {
+    font-size: 13px;
+    border-left: 1px solid #a5adb5;
+    height: 100%;
+    overflow: auto;
+
+    .tab-container > .nav-tabs {
+      font-size: 14px;
+    }
+    
+    & > add-field-dropdown {
+      @include top-level-add-field-dropdown-container;
+    }
+  }
+
+  .add-field-dropdown-container {
+    width: 100%;
+  }
+  
+  .middle.main-container {
+    padding: 0px;
+  }
+
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #2c3e50;
+    height: 100%;
+    width: 0%;
+    overflow-x: hidden;
+    opacity: 0;
+    visibility: hidden;
+    @include top-level-add-field-dropdown-container;
+    transition: width 0.1s ease-in;
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      width: $expanded-sidebar-width;
+      padding-left: 5px;
+    }
+  }
+
+  .collapsed-menu-container {
+    position: relative;
+    background-color: #1D2D3D;
+    flex: 0 0 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    .add-field-button {
+      position: absolute;
+      top: 0px;
+      margin-bottom: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      cursor: pointer;
+      .btn-add-field-dropdown {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        opacity: 1;
+        background-color: transparent;
+        margin-top: 10px;
+        &:hover, &:focus, &:active {
+          outline: none;
+        }
+        i {
+          color: #ddd;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+    
+    .preview-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      height: 30px;
+      border-radius: 20%;
+      border: 2px solid #ddd;
+      width: 30px;
+      .fa {
+        color: #ddd;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    .open-sidebar-container {
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      border-top: 2px solid #283948;
+      border-right: 2px solid #283948;
+      color: #ddd;
+      &:hover {
+        color: white;
+        text-shadow: 3px 3px 14px #2a5d88;
+      }
+      .fa-angle-right {
+        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        &.rotate {
+          transform: rotate(-180deg);
+          -webkit-transform: rotate(-180deg);
+          -ms-transform: rotate(-180deg);
+        }
+      }
+    }
+  }
+
+  .middle.main-container {
+    flex-basis: 60%;
+    &.maximizeEditor {
+      flex-grow: 2;
+    }
+  }
+
+  .right.main-container {
+    flex-basis: 40%;
+    flex-shrink: 0;
+    &.minimizePreview {
+      flex-basis: 0%;
+    }
+    .btn-toggle {
+      position: fixed;
+      right: 0;
+    }
+  }
+
+  .editor-btn-delete {
+    @include opac-btn(red);
+
+    &.editor-btn-delete-text {
+      @include opac-text-btn;
+    }
+  }
+
+  .custom-title-dropdown-item button {
+    @include opac-btn(#337ab7);
+    @include opac-text-btn;
+  }
+
+  .editor-btn-move-down {
+    padding-bottom: 0;
+  }
+
+  .editor-btn-move-up, .editor-btn-move-down {
+    padding: 0;
+    font-size: 11px;
+    border: 0;
+    background: transparent;
+    opacity: 0.2;
+
+    &:hover {
+      opacity: 0.6;
+    } 
+  }
+
+  ul.pagination-top {
+    margin: -16px 0px 0px 0px;
+  }
+
+  td.button-holder, th.button-holder {
+    width: 40.33px;
+    text-align: center;
+    vertical-align: middle;
+
+    &.sortable {
+      width: 46px;
+    }
+  }
+
+  // make all th of table-list with add-field-dropdown clickable
+  th.button-holder {
+    .add-field-dropdown-container {
+      width: 100%;
+    }
+
+    .btn-add-field-dropdown {
+      float: right;
+    }
+  }
+
+  label {
+    color: $label-color;
+  }
+
+  .highlight {
+    border: 2px solid yellow !important;
+  }
+
+  // FIXME: only used in table-list and table-list it's own version?
+  table.editable-inner-table {
+
+    > tbody > tr {
+      border-bottom: 1px solid white !important;
+    }
+
+    add-new-element-button .button-container {
+      padding-left: 6px;
+    }
+
+    label {
+      display: inline;
+      font-weight: initial;
+      padding-left: 5px;
+    }
+
+    .dropdown-menu {
+      left: inherit;
+      right: 0px;
+      min-width: 100px;
+    }
+
+    table-layout: fixed;
+  }
+
+  .title-dropdown-item {
+    button {
+      width: 100%;
+      text-align: left;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+
+
+  .tooltip.top .tooltip-arrow {
+    border-top-color: transparent;
+  }
+
+  .tooltip {
+    width: 90%;
+  }
+
+  button.btn-toggle {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+
+  // Fix typeahead position and size 
+  .autocomplete-container {
+    .dropdown {
+      position: relative !important;
+      top: 0px !important;
+      left: 0px !important;
+    }
+  }
+
+  div.admin-mode {
+    padding-top: 8px;
+    width: 100%;
+  }
+
+  label.admin-mode {
+    color: #e0dfdf;
+    font-size: 13px;
+    font-weight: normal;
+    width: 90%;
+    padding-left: 4px;
+  }
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #757575;
+  }
+
+  .btn {
+
+    &.btn-success {
+      background-color: $green-sea;
+      border-color: $green-sea;
+      color: white;
+
+      &:hover, &:active, &:focus {
+        background-color: lighten($green-sea, 5%) !important;
+        color: white;
+      }
+    }
+
+    .fa {
+        margin-right: 2px;
+      }
+  }
+
+  /* Styles for tabset */
+
+  .nav {
+    margin-bottom: 3px;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border-top: 1px solid #2c3e50;
+    background-color: white;
+  }
+
+  .nav-tabs > li > a:hover {
+    border-top: 1px solid #2c3e50;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    transition: all .4s;
+  }
+
+  .nav.nav-tabs {
+    border-bottom: 5px solid white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+  }
+
+  .nav-tabs > li > a {
+    margin-right: 0px;
+    border-radius: 0px;
+    border-right: 1px solid #e0e2e2;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    div {
+      pointer-events: none;
+      input, button, a, i, string-input > div {
+          opacity: .5;
+        }
+    }
+
+    button {
+      pointer-events: none;
+    }
+  }
+  
+  $custom-active-color: #31617B;
+  .pagination > .active > a {
+    background-color: $custom-active-color;
+    border-color: $custom-active-color;
+  }
+  
+  .btn.btn-switch {
+    background-color: #7DA0B3;
+    &.active {
+      background-color: $custom-active-color;
+    }
+  }
+
+}
+
+.bottom-console-container {
+  height: 25%;
+  overflow: hidden;
+
+  .tab-content {
+    height: 90%;
+    overflow: scroll;
+  }
+
+}
+
+.red-left-border {
+  border-left: 9px solid #e74c3c !important;
+}
+
+.max-height-90-vh {
+  max-height: 90vh;
+}
+
+.max-height-70-vh {
+  max-height: 70vh;
+}
+
+// Hide all add-field-dropdown in complex-list-field in favor of single add-nested-field-dropdown
+complex-list-field {
+  add-field-dropdown {
+    display: none;
+  }
+}
+
+// Make nav tabs sticky
+.nav-tabs {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+typeahead-container a[href='#'] {
+  padding: 0 !important;
+}
