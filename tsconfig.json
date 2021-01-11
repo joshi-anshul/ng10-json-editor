@@ -1,7 +1,5 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
-  "enableIvy": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -16,6 +14,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "json-editor": [
+        "dist/json-editor/json-editor",
+        "dist/json-editor"
+      ]
+    }
   }
 }

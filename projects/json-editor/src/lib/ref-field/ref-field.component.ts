@@ -135,10 +135,7 @@ export class RefFieldComponent implements OnChanges {
     this.refData = undefined;
     this.http
       .get(this.ref, this.requestOptions)
-      .pipe(map((res: any) => res.json()))
-      .catch(error => {
-        return of({ $error: error });
-      }).subscribe(data => {
+      .pipe(map((res: any) => res.json())).subscribe(data => {
         this.refData = data;
         this.changeDetectorRef.markForCheck();
       });

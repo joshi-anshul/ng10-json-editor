@@ -3,129 +3,48 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng2-json-editor10": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+    "json-editor": {
+      "projectType": "library",
+      "root": "projects/json-editor",
+      "sourceRoot": "projects/json-editor/src",
+      "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "outputPath": "dist/ng2-json-editor10",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "tsConfig": "projects/json-editor/tsconfig.lib.json",
+            "project": "projects/json-editor/ng-package.json"
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
+              "tsConfig": "projects/json-editor/tsconfig.lib.prod.json"
             }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ng2-json-editor10:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "ng2-json-editor10:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ng2-json-editor10:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-            ],
-            "scripts": []
+            "main": "projects/json-editor/src/test.ts",
+            "tsConfig": "projects/json-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/json-editor/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "projects/json-editor/tsconfig.lib.json",
+              "projects/json-editor/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng2-json-editor10:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng2-json-editor10:serve:production"
-            }
-          }
         }
       }
-    }
-  },
-  "defaultProject": "ng2-json-editor10",
+    }},
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "json-editor"
 }
