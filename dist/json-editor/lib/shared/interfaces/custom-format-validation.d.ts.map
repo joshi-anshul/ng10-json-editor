@@ -1,0 +1,1 @@
+{"version":3,"file":"custom-format-validation.d.ts","sourceRoot":"/var/www/html/Anshul-Joshi/Angular/GitHulftInc/json-editor/projects/json-editor/src/","sources":["lib/shared/interfaces/custom-format-validation.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,sBAAsB;IACrC;;;;;OAKG;IACH,CAAC,MAAM,EAAE,MAAM,GAAG;QAChB,aAAa,EAAE,CAAC,KAAK,EAAE,GAAG,KAAK,OAAO,CAAC;KACxC,CAAC;CACH"}
